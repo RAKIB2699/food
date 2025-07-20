@@ -7,6 +7,9 @@ import { Component } from "react";
 import Home from "../Home/Home";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import AddFood from "../AddFood/AddFood";
+import PrivateRoute from "../Provider/PrivateRoute";
+import AvailableFood from "../AvailableFood/AvailableFood";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +27,16 @@ const router = createBrowserRouter([
         {
           path:'/signin',
           Component: Register
+        },
+        {
+          path:'/addfood',
+          element: <PrivateRoute><AddFood/></PrivateRoute>
+        },
+        {
+          path: '/availablefood',
+          element: <PrivateRoute><AvailableFood/></PrivateRoute>
         }
+      
     ]
   },
 ]);

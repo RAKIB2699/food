@@ -19,8 +19,8 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li><NavLink to="/" className="hover:text-green-400">Home</NavLink></li>
-      <li><NavLink to="/available-foods" className="hover:text-green-400">Available Foods</NavLink></li>
-      <li><NavLink to="/add-food" className="hover:text-green-400">Add Food</NavLink></li>
+      <li><NavLink to="/availablefood" className="hover:text-green-400">Available Foods</NavLink></li>
+      <li><NavLink to="/addfood" className="hover:text-green-400">Add Food</NavLink></li>
       <li><NavLink to="/manage-my-foods" className="hover:text-green-400">Manage My Foods</NavLink></li>
       <li><NavLink to="/my-requests" className="hover:text-green-400">My Food Request</NavLink></li>
     </>
@@ -69,7 +69,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4 relative group">
 
             <img
-              src={user.photoURL || ''}
+              src={user.photoURL}
               alt="User"
               className="w-10 h-10 rounded-full border cursor-pointer"
             />
