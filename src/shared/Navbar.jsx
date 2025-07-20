@@ -21,7 +21,7 @@ const Navbar = () => {
       <li><NavLink to="/" className="hover:text-green-400">Home</NavLink></li>
       <li><NavLink to="/availablefood" className="hover:text-green-400">Available Foods</NavLink></li>
       <li><NavLink to="/addfood" className="hover:text-green-400">Add Food</NavLink></li>
-      <li><NavLink to="/manage-my-foods" className="hover:text-green-400">Manage My Foods</NavLink></li>
+      <li><NavLink to="/manage-food" className="hover:text-green-400">Manage My Foods</NavLink></li>
       <li><NavLink to="/my-requests" className="hover:text-green-400">My Food Request</NavLink></li>
     </>
   );
@@ -52,7 +52,7 @@ const Navbar = () => {
             {navLinks}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost text-xl text-green-500">FoodShare</Link>
+        <Link to="/" className="btn btn-ghost text-xl text-green-500">Foody</Link>
       </div>
 
 

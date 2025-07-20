@@ -11,6 +11,7 @@ import AddFood from "../AddFood/AddFood";
 import PrivateRoute from "../Provider/PrivateRoute";
 import AvailableFood from "../AvailableFood/AvailableFood";
 import FoodDetails from "../FoodDetails/FoodDetails";
+import ManageFood from "../ManageFood/ManageFood";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:3000/foods/${params.id}`),
         element: <FoodDetails />
+      },
+      {
+        path: '/manage-food',
+        element: <PrivateRoute><ManageFood /></PrivateRoute>,
       }
 
     ]
