@@ -25,11 +25,8 @@ const FoodDetails = () => {
             requestDate: new Date().toISOString(),
             notes,
         };
-
-        axios.patch(`http://localhost:3000/foods/${id}`, requestData)
-            .then(() => {
-                alert('Request submitted!');
-            });
+        axios.post('http://localhost:3000/foods/myRequests', requestData)
+        .then(res=>console.log(res.data))
     };
 
     if (!food) return <Loading></Loading>;

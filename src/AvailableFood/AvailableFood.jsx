@@ -1,31 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, {  } from 'react';
 import { useNavigate } from 'react-router';
 
 const AvailableFood = () => {
-    const [foods, setFoods] = useState([]);
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const {data:foods, isLoading}=useQuery({
+        queryKey: ['foods'],
+        queryFn: async()=>{
+            const res = await axios.get('http://localhost:3000/foods')
+            return res.data
+        }
+    })
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/foods') // ✅ your API endpoint
-            .then(res => {
-                console.log('Fetched foods:', res.data);
-
-                const availableFoods = res.data
-                    .filter(food => (food.status || '').toLowerCase() === 'available') // case-insensitive match
-                    .sort((a, b) => new Date(a.expireDateTime) - new Date(b.expireDateTime)); // sort by expiration date
-
-                setFoods(availableFoods);
-                setLoading(false);
-            })
-            .catch(err => {
-                console.error('Error fetching foods:', err);
-                setLoading(false);
-            });
-    }, []);
-
-    if (loading) {
+    if (isLoading) {
         return <p className="text-center my-10 text-xl font-medium">Loading available foods...</p>;
     }
 

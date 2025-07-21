@@ -81,46 +81,95 @@ const ManageFood = () => {
                 </div>
             )}
 
-            {/* Update Modal */}
+
             {updateFood && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center px-4">
                     <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
                         <h2 className="text-lg md:text-xl font-semibold mb-4">Update Food</h2>
-                        <form onSubmit={(e) => {
-                            e.preventDefault();
-                            const form = e.target;
-                            const updated = {
-                                foodName: form.foodName.value,
-                                quantity: form.quantity.value,
-                            };
-                            axios.patch(`http://localhost:3000/foods/${updateFood._id}`, updated)
-                                .then(() => {
-                                    Swal.fire('Updated!', '', 'success');
-                                    setUpdateFood(null);
-                                    setFoods(prev =>
-                                        prev.map(f => f._id === updateFood._id ? { ...f, ...updated } : f)
-                                    );
-                                });
-                        }}>
-                            <input
-                                type="text"
-                                name="foodName"
-                                defaultValue={updateFood.foodName}
-                                className="input input-bordered w-full mb-3"
-                                required
-                            />
-                            <input
-                                type="text"
-                                name="quantity"
-                                defaultValue={updateFood.quantity}
-                                className="input input-bordered w-full mb-3"
-                                required
-                            />
+
+                        <form
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                const form = e.target;
+                                const updated = {
+                                    foodName: form.foodName.value,
+                                    quantity: form.quantity.value,
+                                    
+                                    pickupLocation: form.pickupLocation.value,
+                                    description: form.description.value,
+                                    expireDateTime: form.expireDateTime.value,
+                                };
+                                axios.patch(`http://localhost:3000/foods/update/${updateFood._id}`, updated)
+                                    .then(() => {
+                                        Swal.fire('Updated!', '', 'success');
+                                        setUpdateFood(null);
+                                        setFoods(prev =>
+                                            prev.map(f => f._id === updateFood._id ? { ...f, ...updated } : f)
+                                        );
+                                    });
+                            }}
+                        >
+                            <div className="mb-3">
+                                <label className="label font-medium">Food Name</label>
+                                <input
+                                    type="text"
+                                    name="foodName"
+                                    defaultValue={updateFood.foodName}
+                                    className="input input-bordered w-full"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="label font-medium">Quantity</label>
+                                <input
+                                    type="text"
+                                    name="quantity"
+                                    defaultValue={updateFood.quantity}
+                                    className="input input-bordered w-full"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="label font-medium">Pickup Location</label>
+                                <input
+                                    type="text"
+                                    name="pickupLocation"
+                                    defaultValue={updateFood.pickupLocation}
+                                    className="input input-bordered w-full"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="label font-medium">Description</label>
+                                <textarea
+                                    name="description"
+                                    defaultValue={updateFood.description}
+                                    className="textarea textarea-bordered w-full"
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="label font-medium">Expire Date</label>
+                                <input
+                                    type="date"
+                                    name="expireDateTime"
+                                    defaultValue={updateFood.expireDateTime?.split('T')[0]}
+                                    className="input input-bordered w-full"
+                                    required
+                                />
+                            </div>
+
                             <div className="flex justify-end gap-2">
                                 <button className="btn btn-primary btn-sm" type="submit">Save</button>
                                 <button className="btn btn-sm" type="button" onClick={() => setUpdateFood(null)}>Cancel</button>
                             </div>
                         </form>
+
+
                     </div>
                 </div>
             )}
