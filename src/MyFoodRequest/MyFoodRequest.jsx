@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import axios from 'axios';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const MyFoodRequest = () => {
     const { user } = useContext(AuthContext);
     const [requests, setRequests] = useState([]);
-
+    const axiosSecure = useAxiosSecure();
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const res = await axios.get(
-                    `http://localhost:3000/foods/myRequests/${user?.email}`
-                );
+                const res = await axiosSecure.get(`/foods/myRequests/${user?.email}`)
                 setRequests(res.data);
             } catch (error) {
                 console.error(error);
@@ -19,7 +18,7 @@ const MyFoodRequest = () => {
         };
 
         fetchRequests();
-    }, [user]);
+    }, [axiosSecure, user?.email]);
     
 
     
