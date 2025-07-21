@@ -2,18 +2,23 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Provider/AuthProvider';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const ManageFood = () => {
     const { user } = useContext(AuthContext);
-    const [foods, setFoods] = useState([]);
     const [updateFood, setUpdateFood] = useState(null);
-
-    useEffect(() => {
-        if (user?.email) {
-            axios.get(`http://localhost:3000/myFoods?email=${user.email}`)
-                .then(res => setFoods(res.data));
+    const axiosSecure = useAxiosSecure();
+   
+    const { data: foods, isLoading, refetch } = useQuery({
+        queryKey: ["myFoods"],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/myFoods?email=${user.email}`);
+            return res.data;
         }
-    }, [user]);
+    });
+
+    if (isLoading) return "Loading...";
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -24,9 +29,9 @@ const ManageFood = () => {
             confirmButtonText: 'Yes, delete it!',
         }).then(result => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:3000/foods/${id}`)
+                axiosSecure.delete(`/foods/${id}`)
                     .then(() => {
-                        setFoods(prev => prev.filter(food => food._id !== id));
+                        refetch();
                         Swal.fire('Deleted!', 'Your food has been deleted.', 'success');
                     });
             }
@@ -37,7 +42,7 @@ const ManageFood = () => {
         <div className="w-full px-4 py-6 max-w-7xl mx-auto">
             <h2 className="text-xl md:text-3xl font-bold mb-6 text-center">Manage Your Foods</h2>
 
-            {foods.length === 0 ? (
+            {foods?.length === 0 ? (
                 <p className="text-center text-gray-500">No food found.</p>
             ) : (
                 <div className="overflow-x-auto">
@@ -52,7 +57,7 @@ const ManageFood = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {foods.map(food => (
+                            {foods?.map(food => (
                                 <tr key={food._id} className="border-t hover:bg-gray-50">
                                     <td className="p-2 border text-center">
                                         <img src={food.image} alt={food.foodName} className="w-10 h-10 md:w-12 md:h-12 mx-auto rounded object-cover" />
@@ -81,7 +86,6 @@ const ManageFood = () => {
                 </div>
             )}
 
-
             {updateFood && (
                 <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center px-4">
                     <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
@@ -94,18 +98,15 @@ const ManageFood = () => {
                                 const updated = {
                                     foodName: form.foodName.value,
                                     quantity: form.quantity.value,
-                                    
                                     pickupLocation: form.pickupLocation.value,
                                     description: form.description.value,
                                     expireDateTime: form.expireDateTime.value,
                                 };
-                                axios.patch(`http://localhost:3000/foods/update/${updateFood._id}`, updated)
+                                axiosSecure.patch(`/foods/update/${updateFood._id}`, updated)
                                     .then(() => {
                                         Swal.fire('Updated!', '', 'success');
                                         setUpdateFood(null);
-                                        setFoods(prev =>
-                                            prev.map(f => f._id === updateFood._id ? { ...f, ...updated } : f)
-                                        );
+                                        refetch();
                                     });
                             }}
                         >
@@ -168,8 +169,6 @@ const ManageFood = () => {
                                 <button className="btn btn-sm" type="button" onClick={() => setUpdateFood(null)}>Cancel</button>
                             </div>
                         </form>
-
-
                     </div>
                 </div>
             )}
