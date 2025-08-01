@@ -3,7 +3,7 @@ import React, { use } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const axiosSecure = axios.create({
-    baseURL: "http://localhost:3000/"
+    baseURL: "https://foody-hub-server.vercel.app/"
 });
 const useAxiosSecure = () => {
     const {user} =use(AuthContext);

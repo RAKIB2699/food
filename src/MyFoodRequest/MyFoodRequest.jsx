@@ -1,26 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
-import axios from 'axios';
+
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import Loading from '../Loading';
 
 const MyFoodRequest = () => {
     const { user } = useContext(AuthContext);
-    const [requests, setRequests] = useState([]);
     const axiosSecure = useAxiosSecure();
-    useEffect(() => {
-        const fetchRequests = async () => {
-            try {
-                const res = await axiosSecure.get(`/foods/myRequests/${user?.email}`)
-                setRequests(res.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        fetchRequests();
-    }, [axiosSecure, user?.email]);
     
-
+  const {data:requests, isLoading}=useQuery({
+    queryKey: ['requested-food'],
+    queryFn: async()=>{
+        const res = await axiosSecure.get(`/foods/myRequests/${user?.email}`)
+        return res.data
+    }
+  })
+  if(isLoading)return<Loading></Loading>
     
     return (
         <div className="w-11/12 max-w-6xl mx-auto my-12">
@@ -46,7 +42,7 @@ const MyFoodRequest = () => {
                                     <td className="border px-4 py-2">{req.foodName}</td>
                                     <td className="border px-4 py-2">{req.donorName}</td>
                                     <td className="border px-4 py-2">{req.pickupLocation}</td>
-                                    <td className="border px-4 py-2">{req.expireDate}</td>
+                                    <td className="border px-4 py-2">{req.expireDateTime}</td>
                                     <td className="border px-4 py-2">{req.requestDate}</td>
                                 </tr>
                             ))}

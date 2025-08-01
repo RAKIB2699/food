@@ -12,7 +12,7 @@ const FoodDetails = () => {
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/foods/${id}`)
+        axios.get(`https://foody-hub-server.vercel.app/foods/${id}`)
             .then(res => setFood(res.data))
             .catch(err => console.error(err));
     }, [id]);
@@ -25,7 +25,7 @@ const FoodDetails = () => {
             requestDate: new Date().toISOString(),
             notes,
         };
-        axios.post('http://localhost:3000/foods/myRequests', requestData)
+        axios.post('https://foody-hub-server.vercel.app/foods/myRequests', requestData)
         .then(res=>console.log(res.data))
     };
 

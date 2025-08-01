@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       {
         path: '/foods/:id',
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/foods/${params.id}`),
+          fetch(`https://foody-hub-server.vercel.app/foods/${params.id}`),
         element: <FoodDetails />
       },
       {

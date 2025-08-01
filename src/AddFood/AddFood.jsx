@@ -14,7 +14,7 @@ const AddFood = () => {
         const formData = new FormData(form);
         const foodData = Object.fromEntries(formData.entries());
 
-        axios.post('http://localhost:3000/foods', foodData)
+        axios.post('https://foody-hub-server.vercel.app/foods', foodData)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire({
@@ -86,7 +86,7 @@ const AddFood = () => {
                 {/* Food Status (default: available) */}
                 <div className="form-control md:col-span-2">
                     <label className="label">Food Status</label>
-                    <input type="text" name="status" defaultValue="available"  className="input input-bordered w-full bg-gray-100" />
+                    <input type="text" name="status" defaultValue="available"  disabled className="input input-bordered w-full bg-gray-100" />
                 </div>
 
                 {/* Submit Button */}

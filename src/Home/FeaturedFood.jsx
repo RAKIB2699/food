@@ -7,7 +7,7 @@ const FeaturedFood = () => {
     const [foods, setFoods] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3000/foods/featured')
+        axios.get('https://foody-hub-server.vercel.app/foods/featured')
             .then(response => setFoods(response.data))
             .catch(error => {
                 console.error('Error fetching featured foods:', error);

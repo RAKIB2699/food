@@ -1,9 +1,9 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext,  useState } from 'react';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Provider/AuthProvider';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import Loading from '../Loading';
 
 const ManageFood = () => {
     const { user } = useContext(AuthContext);
@@ -18,7 +18,7 @@ const ManageFood = () => {
         }
     });
 
-    if (isLoading) return "Loading...";
+    if (isLoading) return <Loading/>
 
     const handleDelete = (id) => {
         Swal.fire({

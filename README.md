@@ -93,5 +93,12 @@ This project was built as part of a full-stack developer assignment to demonstra
 
 ---
 
-## 📂 Folder Structure (Client)
+## ✅ Highlights
+
+- 🔒 JWT security on private routes
+- 🌐 Fully responsive (mobile, tablet, desktop)
+- 📊 Real-time data updates with React Query
+- 🎨 Modern Tailwind UI with consistent spacing & alignment
+- ⚙️ Proper environment variables for Firebase and MongoDB
+- 🚫 Prevents CORS, 404, and refresh issues in deployment
 

@@ -11,7 +11,7 @@ const AvailableFood = () => {
   const { data: foods, isLoading } = useQuery({
     queryKey: ['foods'],
     queryFn: async () => {
-      const res = await axios.get('http://localhost:3000/foods');
+      const res = await axios.get('https://foody-hub-server.vercel.app/foods');
       return res.data;
     },
   });
