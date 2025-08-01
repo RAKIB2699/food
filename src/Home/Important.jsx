@@ -4,7 +4,7 @@ const Important = () => {
     return (
 
         <section className="w-11/12 max-w-6xl mx-auto my-16 py-10">
-            <h2 className="text-3xl font-bold mb-8 text-center text-yellow-700">Why is Food Important?</h2>
+            <h2 className="text-3xl font-bold mb-8 text-center text-yellow-700">Why Food is Important?</h2>
             <div className="flex flex-col md:flex-row gap-6">
 
                 <div className="flex-1 bg-yellow-100 p-6 rounded-lg shadow-md text-center">
