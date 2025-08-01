@@ -2,11 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
+import Loading from '../Loading';
 
 const AvailableFood = () => {
   const navigate = useNavigate();
-  const [isTwoCols, setIsTwoCols] = useState(false); 
-  const [searchTerm, setSearchTerm] = useState(''); 
+  const [isTwoCols, setIsTwoCols] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const { data: foods, isLoading } = useQuery({
     queryKey: ['foods'],
@@ -17,7 +18,7 @@ const AvailableFood = () => {
   });
 
   if (isLoading) {
-    return <p className="text-center my-10 text-xl font-medium">Loading available foods...</p>;
+    return <Loading></Loading>
   }
 
   if (foods.length === 0) {
@@ -50,6 +51,7 @@ const AvailableFood = () => {
           .filter(food =>
             food.foodName.toLowerCase().includes(searchTerm.toLowerCase())
           )
+          .sort((a, b) => new Date(a.expireDateTime) - new Date(b.expireDateTime)) // ascending by expireDateTime
           .map(food => (
             <div key={food._id} className="card bg-white shadow-md p-4 rounded-lg">
               <img

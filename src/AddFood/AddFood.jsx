@@ -86,7 +86,7 @@ const AddFood = () => {
                 {/* Food Status (default: available) */}
                 <div className="form-control md:col-span-2">
                     <label className="label">Food Status</label>
-                    <input type="text" name="status" defaultValue="available"  disabled className="input input-bordered w-full bg-gray-100" />
+                    <input type="text" name="status" value="available"   className="input input-bordered w-full bg-gray-100" />
                 </div>
 
                 {/* Submit Button */}
