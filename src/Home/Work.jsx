@@ -9,7 +9,7 @@ const Work = () => {
       <h2 className="text-2xl md:text-3xl font-semibold text-center mb-8">
         Don't Waste Food
       </h2>
-       <p className='text-center text-2xl font-semibold mb-4'>Share Your food to see happy smile another man</p>
+       <p className='text-center text-2xl font-semibold mb-4'>Share your food to bring a smile to someone else's face—it costs little, but means everything</p>
       <div className="flex flex-col md:flex-row justify-center items-center gap-6">
         <div className="flex-1">
           <img

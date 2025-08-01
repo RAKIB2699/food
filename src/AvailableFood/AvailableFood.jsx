@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router';
 
 const AvailableFood = () => {
   const navigate = useNavigate();
-  const [isTwoCols, setIsTwoCols] = useState(false); // layout toggle state
-  const [searchTerm, setSearchTerm] = useState(''); // search input state
+  const [isTwoCols, setIsTwoCols] = useState(false); 
+  const [searchTerm, setSearchTerm] = useState(''); 
 
   const { data: foods, isLoading } = useQuery({
     queryKey: ['foods'],
