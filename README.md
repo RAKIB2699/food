@@ -8,8 +8,8 @@ This project was built as part of a full-stack developer assignment to demonstra
 
 ## 🌍 Live Links
 
-- 🔗 **Client:** [https://YOUR_FRONTEND_URL.netlify.app](https://YOUR_FRONTEND_URL.netlify.app)
-- 🔗 **Server:** [https://YOUR_BACKEND_URL.onrender.com](https://YOUR_BACKEND_URL.onrender.com)
+- 🔗 **Client:** [https://foody-hub-8a358.web.app](https://foody-hub-8a358.web.app)
+
 
 ---
 
