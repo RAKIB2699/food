@@ -15,6 +15,9 @@ import ManageFood from "../ManageFood/ManageFood";
 import MyFoodRequest from "../MyFoodRequest/MyFoodRequest";
 import ErrorPage from "../shared/ErrorPages";
 import AboutUs from "../shared/AboutUs";
+import FAQ from "../shared/FAQ";
+import Contact from "../shared/Contact";
+
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,14 @@ const router = createBrowserRouter([
       {
         path: '/aboutus',
         Component: AboutUs
+      },
+      {
+        path: '/faq',
+        Component: FAQ
+      },
+      {
+        path: '/contact',
+        Component: Contact
       },
       {
         path: '/addfood',
