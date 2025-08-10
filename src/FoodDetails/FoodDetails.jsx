@@ -37,7 +37,7 @@ const FoodDetails = () => {
             <h2 className="text-2xl font-bold mt-4">{food.foodName}</h2>
             <p><strong>Quantity:</strong> {food.quantity}</p>
             <p><strong>Pickup:</strong> {food.pickupLocation}</p>
-            <p><strong>Donator:</strong> {food.donatorName} ({food.donatorEmail})</p>
+            <p><strong>Donator:</strong> {food.donorName} ({food.donorEmail})</p>
             <p><strong>Expires:</strong> {new Date(food.expireDateTime).toLocaleString()}</p>
             <p><strong>Notes:</strong> {food.notes}</p>
 

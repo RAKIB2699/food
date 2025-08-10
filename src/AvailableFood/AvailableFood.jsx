@@ -93,9 +93,7 @@ const AvailableFood = () => {
               <p><span className="font-medium">Quantity:</span> {food.quantity}</p>
               <p><span className="font-medium">Location:</span> {food.pickupLocation}</p>
               <p><span className="font-medium">Expires:</span> {new Date(food.expireDateTime).toLocaleString()}</p>
-              {food.notes && (
-                <p className="text-sm mt-1 text-gray-600 flex-grow">{food.notes}</p>
-              )}
+            
               <button
                 className="btn btn-primary mt-4 self-start"
                 onClick={() => navigate(`/foods/${food._id}`)}
