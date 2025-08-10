@@ -6,17 +6,17 @@ const Stats = () => {
     {
       label: "Total Users",
       value: 1200,
-      icon: <FaUsers className="text-4xl mb-2 text-blue-300" />, 
+      icon: <FaUsers className="text-5xl mb-3 text-green-500" />,
     },
     {
       label: "Daily Food Donations",
       value: 350,
-      icon: <FaHandHoldingHeart className="text-4xl mb-2 text-blue-300" />, 
+      icon: <FaHandHoldingHeart className="text-5xl mb-3 text-green-500" />,
     },
     {
       label: "Daily Food Served",
       value: 300,
-      icon: <FaUtensils className="text-4xl mb-2 text-blue-300" />, 
+      icon: <FaUtensils className="text-5xl mb-3 text-green-500" />,
     },
   ];
 
@@ -45,16 +45,20 @@ const Stats = () => {
 
   return (
     <section className="w-11/12 max-w-[1600px] mx-auto mt-12">
-        <p className="text-primary text-center text-3xl font-semibold mb-6">Our Service</p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+      <p className="text-green-700 text-center text-3xl font-extrabold mb-10 tracking-wide">
+        Our Service
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
         {statsData.map((stat, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:bg-green-300 hover:text-white transition-colors duration-300 flex flex-col items-center"
+            className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow-lg p-8 border border-green-200 flex flex-col items-center"
           >
             {stat.icon}
-            <h3 className="text-4xl font-bold">{counts[index]}</h3>
-            <p className="mt-2 text-lg">{stat.label}</p>
+            <h3 className="text-5xl font-extrabold text-green-700">{counts[index]}</h3>
+            <p className="mt-2 text-xl font-semibold text-green-600">{stat.label}</p>
+            {/* Graphical colored bar below the number */}
+            <div className="w-24 h-1 rounded-full bg-green-400 mt-4 animate-pulse"></div>
           </div>
         ))}
       </div>
