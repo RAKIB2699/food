@@ -31,7 +31,7 @@ const Important = () => {
                     </p>
                 </div>
 
-                {/* New card */}
+                
                 <div className="flex-1 bg-white text-black border-2 border-green-400 p-6 rounded-lg shadow-md text-center hover:bg-primary hover:text-white transition-colors duration-300">
                     <h3 className="text-xl font-semibold mb-3">Innovation & Growth</h3>
                     <p>

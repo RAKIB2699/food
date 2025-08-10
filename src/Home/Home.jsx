@@ -4,6 +4,7 @@ import FeaturedFood from './FeaturedFood';
 
 import Important from './Important';
 import Work from './Work';
+import Stats from './Stats';
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
             <FeaturedFood></FeaturedFood>
             <Important></Important>
             <Work></Work>
+            <Stats></Stats>
         </div>
     );
 };
