@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import Loading from '../Loading';
 
-// You can replace this with any suitable eye-catching SVG or image URL you prefer
 const NoDataGraphic = () => (
   <div className="flex flex-col items-center justify-center text-center text-gray-400 mt-20">
     <svg
@@ -29,6 +28,7 @@ const AvailableFood = () => {
   const navigate = useNavigate();
   const [isTwoCols, setIsTwoCols] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortOption, setSortOption] = useState('expireAsc'); // default sort
 
   const { data: foods = [], isLoading } = useQuery({
     queryKey: ['foods'],
@@ -42,43 +42,65 @@ const AvailableFood = () => {
     return <Loading />;
   }
 
-  // Filtered and sorted foods
-  const filteredFoods = foods
-    .filter(food =>
-      food.foodName.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort(
-      (a, b) =>
-        new Date(a.expireDateTime).getTime() - new Date(b.expireDateTime).getTime()
-    );
+  // Filter foods by search term
+  const filteredFoods = foods.filter(food =>
+    food.foodName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  if (filteredFoods.length === 0) {
+  // Sort function based on selected option
+  const sortedFoods = filteredFoods.sort((a, b) => {
+    switch (sortOption) {
+      case 'quantityAsc':
+        return Number(a.quantity) - Number(b.quantity);
+      case 'expireAsc':
+      default:
+        return new Date(a.expireDateTime) - new Date(b.expireDateTime);
+    }
+  });
+
+  if (sortedFoods.length === 0) {
     return <NoDataGraphic />;
   }
 
   return (
     <div className="max-w-[1600px] w-11/12 mx-auto mt-12 flex flex-col lg:flex-row gap-10">
-      {/* Left sidebar: Search & toggle */}
+      {/* Left sidebar: Search, toggle, sort */}
       <aside className="lg:w-1/4 flex flex-col gap-6">
         <h2 className="text-3xl font-semibold text-green-700 mb-4">Available Foods</h2>
+
         <input
           type="text"
           placeholder="Search by food name..."
-          className="input input-bordered w-full"
+          className="input input-bordered w-full text-center"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+
         <button
           onClick={() => setIsTwoCols(prev => !prev)}
-          className="btn btn-outline mt-2 w-full"
+          className="btn btn-outline w-full"
         >
           {isTwoCols ? 'Switch to 3 Columns' : 'Switch to 2 Columns'}
         </button>
+
+        {/* Sort dropdown */}
+        <select
+          className="select select-bordered w-full text-center"
+          value={sortOption}
+          onChange={(e) => setSortOption(e.target.value)}
+        >
+          <option value="expireAsc">Sort by Expire Date ↑</option>
+          <option value="quantityAsc">Sort by Quantity ↑</option>
+        </select>
       </aside>
 
       {/* Right main content: Food cards */}
-      <main className={`lg:w-3/4 grid grid-cols-1 sm:grid-cols-2 ${isTwoCols ? '' : 'lg:grid-cols-3'} gap-6`}>
-        {filteredFoods.map(food => (
+      <main
+        className={`lg:w-3/4 grid grid-cols-1 sm:grid-cols-2 ${
+          isTwoCols ? '' : 'lg:grid-cols-3'
+        } gap-6`}
+      >
+        {sortedFoods.map(food => (
           <div
             key={food._id}
             className="card bg-white shadow-md rounded-lg flex flex-col overflow-hidden"
@@ -90,10 +112,17 @@ const AvailableFood = () => {
             />
             <div className="p-4 flex flex-col flex-grow">
               <h3 className="text-xl font-semibold mb-2">{food.foodName}</h3>
-              <p><span className="font-medium">Quantity:</span> {food.quantity}</p>
-              <p><span className="font-medium">Location:</span> {food.pickupLocation}</p>
-              <p><span className="font-medium">Expires:</span> {new Date(food.expireDateTime).toLocaleString()}</p>
-            
+              <p>
+                <span className="font-medium">Quantity:</span> {food.quantity}
+              </p>
+              <p>
+                <span className="font-medium">Location:</span> {food.pickupLocation}
+              </p>
+              <p>
+                <span className="font-medium">Expires:</span>{' '}
+                {new Date(food.expireDateTime).toLocaleString()}
+              </p>
+
               <button
                 className="btn btn-primary mt-4 self-start"
                 onClick={() => navigate(`/foods/${food._id}`)}
