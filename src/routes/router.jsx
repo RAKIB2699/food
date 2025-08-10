@@ -14,6 +14,7 @@ import FoodDetails from "../FoodDetails/FoodDetails";
 import ManageFood from "../ManageFood/ManageFood";
 import MyFoodRequest from "../MyFoodRequest/MyFoodRequest";
 import ErrorPage from "../shared/ErrorPages";
+import AboutUs from "../shared/AboutUs";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: '/signin',
         Component: Register
+      },
+      {
+        path: '/aboutus',
+        Component: AboutUs
       },
       {
         path: '/addfood',
