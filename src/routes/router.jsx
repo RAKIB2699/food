@@ -55,13 +55,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/availablefood',
-        element: <PrivateRoute><AvailableFood /></PrivateRoute>
+        element: <AvailableFood />
       },
       {
         path: '/foods/:id',
         loader: ({ params }) =>
           fetch(`https://foody-hub-server.vercel.app/foods/${params.id}`),
-        element: <FoodDetails />
+        element: <PrivateRoute><FoodDetails /></PrivateRoute>
       },
       {
         path: '/manage-food',

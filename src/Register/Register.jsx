@@ -93,7 +93,7 @@ const Register = () => {
 
 
                     <p className="text-sm text-gray-600 text-center">
-                        Already have an account? <span className="text-blue-600 underline cursor-pointer"><Link to='/login'>Login</Link></span>
+                        Already have an account? <span className="text-primary underline cursor-pointer"><Link to='/login'>Login</Link></span>
                     </p>
 
 

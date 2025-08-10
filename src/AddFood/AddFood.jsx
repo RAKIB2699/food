@@ -2,11 +2,13 @@ import React, { use } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 
 
 const AddFood = () => {
     const { user } = use(AuthContext);
+    const navigate = useNavigate();
 
     const handleAddFood = e => {
         e.preventDefault();
@@ -24,6 +26,7 @@ const AddFood = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+                    navigate('/availablefood')
                 }
             })
             .catch(error => {
